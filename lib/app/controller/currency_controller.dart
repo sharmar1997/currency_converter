@@ -52,15 +52,10 @@ class CurrencyController extends GetxController {
     try {
       final service = ExchangeRateService();
       final currencies = await service.fetchExchangeRates();
-      const desiredCodes = ['INR', 'USD', 'EUR', 'CAD', 'KWD', 'CNY', 'JPY'];
-      final filteredCurriencies = currencies
-        .where((c) => desiredCodes.contains(c.code))
-        .toList();
-
       _allCurrencies.assignAll(currencies);
 
-      baseCurrency.value = filteredCurriencies.firstWhere((c) => c.code == 'USD', orElse: () => filteredCurriencies.first);
-      targetCurrency.value = filteredCurriencies.firstWhere((c) => c.code == 'INR', orElse: () => filteredCurriencies.last);
+      baseCurrency.value = currencies.firstWhere((c) => c.code == 'USD', orElse: () => currencies.first);
+      targetCurrency.value = currencies.firstWhere((c) => c.code == 'INR', orElse: () => currencies.last);
 
       baseTextController.text = amount.value.toStringAsFixed(2);
       convertCurrency();

@@ -6,16 +6,6 @@ import 'package:http/http.dart' as http;
 class ExchangeRateService {
   static const String _baseUrl = 'https://open.er-api.com/v6/latest/USD';
 
-  final Map<String, String> currencyflags = {
-    'USD': 'assets/images/us.png',
-    'INR': 'assets/images/india.png',
-    'EUR': 'assets/images/uk.png',
-    'CAD': 'assets/images/cana.png',
-    'KWD': 'assets/images/kuwait.png',
-    'CNY': 'assets/images/china.png',
-    'JPY': 'assets/images/japan.png',
-  };
-
   Future<List<Currency>> fetchExchangeRates() async {
     try {
       final response = await http.get(Uri.parse(_baseUrl));
